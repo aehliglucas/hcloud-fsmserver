@@ -13,6 +13,7 @@ while true; do
 done
 
 rm -f hosts
+cd terraform/
 
 terraform apply \
 	-var="hcloud_token=$HCLOUD_TOKEN" \
