@@ -1,0 +1,22 @@
+---
+- name: Install FlightStripManager Server
+  hosts: all
+  remote_user: root
+  gather_facts: false
+
+  tasks:
+    - name: Install essential software
+      ansible.builtin.apt:
+        name:
+          - python3
+          - htop
+          - vim
+        state: present
+
+    - name: Download FSMS executable
+      ansible.builtin.get_url:
+        url: https://hawk-softworks.de/files/FsmServer-x64-lin-standalone.app
+        dest: /opt/FSMS-standalone.app
+        mode: '0740'
+...
+

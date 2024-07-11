@@ -20,6 +20,6 @@ resource "hcloud_server" "fsms_instance" {
 }
 
 resource "local_file" "ansible_inventory_file" {
-  filename = "hosts"
+  filename = "../ansible/hosts"
   content = hcloud_primary_ip.fsms_instance_ipv4_1.ip_address
 }
