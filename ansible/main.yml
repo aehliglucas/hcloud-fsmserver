@@ -11,6 +11,7 @@
           - python3
           - htop
           - vim
+          - screen
         state: present
 
     - name: Download FSMS executable
@@ -18,5 +19,11 @@
         url: https://hawk-softworks.de/files/FsmServer-x64-lin-standalone.app
         dest: /opt/FSMS-standalone.app
         mode: '0740'
+
+    - name: Start FSMS
+      ansible.builtin.expect:
+        command: screen -S fsms-{{ fsms_port }} /opt/FSMS-standalone.app
+        responses:
+          (?i)custom port?: "y{{ fsms_port }}"
 ...
 
