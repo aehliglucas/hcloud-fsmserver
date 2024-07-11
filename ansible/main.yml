@@ -33,10 +33,11 @@
 
     - name: Start FSMS
       ansible.builtin.expect:
-        command: screen -S fsms-{{ fsms_port }} /opt/FSMS-standalone.app
+        command: screen -S fsms-{{ fsms_port|int + item|int }} /opt/FSMS-standalone.app
         responses:
-          (?i)custom port?: "y{{ fsms_port }}"
+          (?i)custom port?: "y{{ fsms_port|int + item|int }}"
       environment:
         DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
+      with_sequence: start=0 end="{{ fsms_instances|int - 1 }}"
 ...
 

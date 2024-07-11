@@ -23,4 +23,4 @@ terraform apply \
 echo "Adding SSH private key from $ANSIBLE_SSH_PRIVKEY to ssh-agent"
 
 cd ../ansible 
-ansible-playbook -i hosts --private-key $ANSIBLE_SSH_PRIVKEY --extra-vars "fsms_port=$FSMS_PORT" main.yml
+ansible-playbook -i hosts --private-key $ANSIBLE_SSH_PRIVKEY --extra-vars "fsms_port=$FSMS_PORT fsms_instances=$FSMS_INSTANCES" main.yml
