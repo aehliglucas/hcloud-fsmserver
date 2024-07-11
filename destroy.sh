@@ -4,7 +4,7 @@ source .env
 set -a
 
 while true; do
-	read -p "Running this script will create a chargeable HCloud vServer with $FSMS_INSTANCES instance(s) of FSMS running on it. Continue? (y/n) " yn
+	read -p "Running this script will destroy all $FSMS_INSTANCES FSMS instance(s) created earlier. Continue? (y/n) " yn
     case $yn in
         [Yy]* ) break;;
         [Nn]* ) exit;;
@@ -14,13 +14,8 @@ done
 
 cd terraform
 
-terraform apply \
+terraform destroy \
 	-var="hcloud_token=$HCLOUD_TOKEN" \
 	-var="hcloud_datacenter=$HCLOUD_DATACENTER" \
 	-var="ssh_keys_to_inject=$SSH_KEYS_TO_INJECT" \
 	-var="fsms_instances=$FSMS_INSTANCES"
-
-echo "Adding SSH private key from $ANSIBLE_SSH_PRIVKEY to ssh-agent"
-
-cd ../ansible 
-ansible-playbook -i hosts --private-key $ANSIBLE_SSH_PRIVKEY main.yml
