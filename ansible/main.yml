@@ -5,6 +5,9 @@
   gather_facts: false
 
   tasks:
+    - name: Wait for SSH to be open
+      ansible.builtin.wait_for_connection:
+
     - name: Install essential software
       ansible.builtin.apt:
         name:
