@@ -8,11 +8,19 @@
     - name: Install essential software
       ansible.builtin.apt:
         name:
-          - python3
           - htop
           - vim
           - screen
         state: present
+
+    - name: Download libssl1.1 package
+      ansible.builtin.get_url:
+        url: http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+        dest: /opt/libssl1_1.deb
+
+    - name: Install libssl1.1 package
+      ansible.builtin.apt:
+        deb: /opt/libssl1_1.deb
 
     - name: Download FSMS executable
       ansible.builtin.get_url:
@@ -25,5 +33,7 @@
         command: screen -S fsms-{{ fsms_port }} /opt/FSMS-standalone.app
         responses:
           (?i)custom port?: "y{{ fsms_port }}"
+      environment:
+        DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
 ...
 
