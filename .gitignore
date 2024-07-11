@@ -1,3 +1,6 @@
+# Config containing sensitive data
+.env
+
 # Local .terraform directories
 **/.terraform/*
 
