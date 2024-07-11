@@ -12,3 +12,7 @@ variable "ssh_keys_to_inject" {
   description = "SSH key names or IDs that should be added to the hcloud server"
   default = []
 }
+
+variable "fsms_instances" {
+  type = number
+}

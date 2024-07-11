@@ -10,7 +10,7 @@ resource "hcloud_server" "fsms_instance" {
   name = "fsmserver-${var.hcloud_datacenter}"
   image = "ubuntu-24.04"
   datacenter = var.hcloud_datacenter
-  server_type = "cx22"
+  server_type = var.fsms_instances > 3 ? "cx32" : "cx22"
   ssh_keys = var.ssh_keys_to_inject
   public_net {
     ipv4_enabled = true
